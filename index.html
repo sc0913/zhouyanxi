@@ -4,23 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KK | Home</title>
-    <!-- 这行就是换掉乌龟的小星星图标 -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="nav-placeholder"></div>
 
+    <!-- 上半部分：Hero 区域 -->
     <main class="hero-section">
         <div class="hero-content">
-            <!-- 照片这里我帮你注释掉了，如果你想加照片，就把下面的注释符号删掉，并把照片命名为 avatar.jpg 放进文件夹 -->
             <!-- < img src="avatar.jpg" alt="KK" class="hero-avatar"> -->
-            
             <h1 data-zh="周彦希 / KK" data-en="Yanxi Zhou / KK">周彦希 / KK</h1>
             <h2 data-zh="计算机科学与技术专业学生 · 游戏爱好者" data-en="CS Student & Gamer">计算机科学与技术专业学生 · 游戏爱好者</h2>
-            <p data-zh="欢迎来到我的个人网站。这里放着我的几个项目、一些喜欢的句子，还有一个打发时间的小游戏。" data-en="Welcome to my personal website. Here you'll find some of my projects, favorite quotes, and a small game to kill time.">欢迎来到我的个人网站。这里放着我的几个项目、一些喜欢的句子，还有一个打发时间的小游戏。</p >
+            
+            <!-- 这里改成了竖排的文案 -->
+            <div class="hero-desc">
+                <p data-zh="欢迎来到我的个人网站。" data-en="Welcome to my personal website.">欢迎来到我的个人网站。</p >
+                <p data-zh="这里放着我几个小项目，" data-en="Here you'll find a few of my small projects,">这里放着我几个小项目，</p >
+                <p data-zh="一些喜欢的句子，" data-en="some of my favorite quotes,">一些喜欢的句子，</p >
+                <p data-zh="还有一些打发时间的小游戏。" data-en="and a little game to kill time.">还有一些打发时间的小游戏。</p >
+            </div>
+            
         </div>
     </main>
+
+    <!-- 下半部分：新增的探索卡片区域 -->
+    <section class="explore-section">
+        <h2 class="explore-title" data-zh="开始探索" data-en="Start Exploring">开始探索</h2>
+        <div class="explore-grid">
+            
+            <!-- 卡片 1：项目 -->
+            <a href=" " class="explore-card">
+                <div class="explore-icon">🚀</div>
+                <h3 data-zh="我的项目" data-en="My Projects">我的项目</h3>
+                <p data-zh="看看我未来打算做些什么" data-en="See what I plan to do" >看看我未来打算做些什么</p >
+            </a >
+
+            <!-- 卡片 2：格言 -->
+            <a href="quotes.html" class="explore-card">
+                <div class="explore-icon">💡</div>
+                <h3 data-zh="喜欢的话" data-en="Favorite Quotes">喜欢的话</h3>
+                <p data-zh="平时收藏的一些句子" data-en="Some collected quotes" >平时收藏的一些句子</p >
+            </a >
+
+            <!-- 卡片 3：实验室 -->
+            <a href="machine.html" class="explore-card">
+                <div class="explore-icon">🎮</div>
+                <h3 data-zh="趣味实验室" data-en="Fun Lab">趣味实验室</h3>
+                <p data-zh="放空大脑的弹球和扫雷" data-en="Bouncing balls and Minesweeper" >放空大脑的弹球和扫雷</p >
+            </a >
+
+        </div>
+    </section>
 
     <div id="footer-placeholder"></div>
     <script src="main.js"></script>
