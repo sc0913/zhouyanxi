@@ -7,14 +7,24 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
-    background-color: #000000; 
-    color: #f5f5f7; 
+    color: #1d1d1f; /* 苹果黑字 */
     line-height: 1.5;
     -webkit-font-smoothing: antialiased; 
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    
+    /* 极光白动态渐变背景 */
+    background: linear-gradient(120deg, #ffffff 0%, #f0f4ff 40%, #e8f0fe 70%, #ffffff 100%);
+    background-size: 200% 200%;
+    animation: aurora 12s ease infinite;
+}
+
+@keyframes aurora {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 main {
@@ -22,7 +32,21 @@ main {
     padding-top: 80px; 
 }
 
-/* ================= 导航栏 (毛玻璃) ================= */
+/* ================= 鼠标跟随水波纹光团 ================= */
+#mouse-glow {
+    position: fixed;
+    width: 600px; 
+    height: 600px;
+    /* 极光蓝紫光晕 */
+    background: radial-gradient(circle, rgba(120, 160, 255, 0.15) 0%, rgba(120, 160, 255, 0.05) 40%, rgba(255, 255, 255, 0) 70%);
+    border-radius: 50%;
+    pointer-events: none; /* 关键：不挡住鼠标点击 */
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out; /* 形成水波拖影感 */
+    z-index: 0; /* 放底层 */
+}
+
+/* ================= 导航栏 (白底毛玻璃) ================= */
 .navbar {
     position: fixed;
     top: 0;
@@ -32,85 +56,112 @@ main {
     justify-content: space-between;
     align-items: center;
     padding: 0 5%;
-    background: rgba(0, 0, 0, 0.7); 
+    background: rgba(255, 255, 255, 0.7);
     backdrop-filter: saturate(180%) blur(20px); 
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     z-index: 1000;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
-.navbar .logo { font-size: 1.2rem; font-weight: 600; letter-spacing: 1px; }
+.navbar .logo { font-size: 1.2rem; font-weight: 600; letter-spacing: 1px; color: #1d1d1f; }
 .nav-links { display: flex; list-style: none; gap: 30px; }
-.nav-links a { color: #a1a1a6; text-decoration: none; font-size: 0.85rem; transition: color 0.3s ease; }
-.nav-links a:hover { color: #f5f5f7; }
+.nav-links a { color: #515154; text-decoration: none; font-size: 0.85rem; transition: color 0.3s ease; }
+.nav-links a:hover { color: #000; }
 #lang-toggle {
-    background: transparent; color: #f5f5f7; border: 1px solid #a1a1a6;
+    background: transparent; color: #1d1d1f; border: 1px solid #d2d2d7;
     border-radius: 20px; padding: 4px 12px; font-size: 0.8rem;
     cursor: pointer; transition: all 0.3s ease;
 }
-#lang-toggle:hover { background: #f5f5f7; color: #000; }
+#lang-toggle:hover { background: #1d1d1f; color: #fff; }
 
 /* ================= 首页 Hero 区域 ================= */
 .hero-section {
     height: calc(100vh - 48px);
     display: flex; justify-content: center; align-items: center; text-align: center;
     padding: 0 20px;
-    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.08) 0%, rgba(0,0,0,1) 60%);
+    position: relative; 
+    z-index: 1; /* 保证文字在光团上方 */
 }
-.hero-content h1 { font-size: 4rem; font-weight: 700; letter-spacing: -1px; margin-bottom: 10px; }
+.hero-content h1 { font-size: 4rem; font-weight: 700; letter-spacing: -1px; margin-bottom: 10px; color: #1d1d1f; }
 .hero-content h2 { font-size: 1.5rem; color: #86868b; font-weight: 500; margin-bottom: 30px; }
-.hero-content p { font-size: 1.1rem; max-width: 600px; margin: 0 auto; color: #d2d2d7; }
+.hero-content p { font-size: 1.1rem; max-width: 600px; margin: 0 auto; color: #515154; }
+
+/* 头像样式 */
+.hero-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; 
+    object-fit: cover; 
+    margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); 
+    border: 2px solid #fff;
+}
 
 /* ================= 项目页 ================= */
-.projects-section { padding: 60px 10%; max-width: 1000px; margin: 0 auto; }
+.projects-section { padding: 60px 10%; max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
 .project-item {
     padding: 30px; margin-bottom: 20px;
-    background: #1c1c1e; border-radius: 18px;
-    transition: transform 0.3s ease;
+    background: rgba(255, 255, 255, 0.8); 
+    backdrop-filter: blur(10px);
+    border-radius: 18px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    border: 1px solid rgba(0,0,0,0.03);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.project-item:hover { transform: scale(1.02); }
-.project-item h3 { font-size: 1.5rem; margin-bottom: 10px; }
-.project-item p { color: #a1a1a6; }
+.project-item:hover { transform: scale(1.02); box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+.project-item h3 { font-size: 1.5rem; margin-bottom: 10px; color: #1d1d1f; }
+.project-item p { color: #515154; }
 
 /* ================= 格言页 ================= */
-.quotes-section { padding: 60px 10%; max-width: 800px; margin: 0 auto; }
+.quotes-section { padding: 60px 10%; max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
 .quote-hero {
     text-align: center; margin-bottom: 60px; padding: 40px;
-    background: linear-gradient(135deg, #1c1c1e, #2c2c2e);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
     border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
 }
-.quote-hero h2 { font-size: 2rem; font-style: italic; line-height: 1.4; }
+.quote-hero h2 { font-size: 2rem; font-style: italic; line-height: 1.4; color: #1d1d1f; }
 .quote-list { list-style: none; }
 .quote-list li {
-    padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
-    font-size: 1.1rem; color: #d2d2d7;
+    padding: 20px 0; border-bottom: 1px solid rgba(0,0,0,0.05);
+    font-size: 1.1rem; color: #1d1d1f;
 }
 
 /* ================= 实验室 ================= */
-.lab-section { padding: 60px 10%; max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
-.lab-box { background: #1c1c1e; border-radius: 20px; padding: 30px; }
-.lab-box h2 { margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
-#ball-canvas { width: 100%; height: 300px; background: #000; border-radius: 12px; cursor: crosshair; }
+.lab-section { padding: 60px 10%; max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; position: relative; z-index: 1; }
+.lab-box { 
+    background: rgba(255, 255, 255, 0.8); 
+    backdrop-filter: blur(10px);
+    border-radius: 20px; padding: 30px; 
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
+.lab-box h2 { margin-bottom: 20px; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 10px; color: #1d1d1f; }
+#ball-canvas { width: 100%; height: 300px; background: #f5f5f7; border-radius: 12px; cursor: crosshair; }
 
 /* 扫雷样式 */
 #minesweeper { display: grid; grid-template-columns: repeat(9, 30px); gap: 2px; justify-content: center; margin-top: 20px; }
 .cell {
-    width: 30px; height: 30px; background: #333; border-radius: 4px;
+    width: 30px; height: 30px; background: #e5e5ea; border-radius: 4px;
     display: flex; justify-content: center; align-items: center;
-    font-weight: bold; cursor: pointer; user-select: none;
+    font-weight: bold; cursor: pointer; user-select: none; color: #1d1d1f;
 }
-.cell.revealed { background: #555; cursor: default; }
-.cell.mine { background: red; }
+.cell.revealed { background: #d2d2d7; cursor: default; }
+.cell.mine { background: #ff3b30; color: white; }
 .btn-restart {
     margin-top: 20px; padding: 10px 20px; border-radius: 20px;
     background: #0071e3; color: white; border: none; cursor: pointer;
-    font-size: 1rem;
+    font-size: 1rem; transition: background 0.3s;
 }
+.btn-restart:hover { background: #0077ed; }
 
 /* ================= Footer ================= */
 .site-footer {
-    background: #1c1c1e; padding: 30px; text-align: center;
+    background: rgba(255, 255, 255, 0.8); padding: 30px; text-align: center;
     font-size: 0.85rem; color: #86868b; margin-top: auto;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    backdrop-filter: blur(10px);
+    position: relative; z-index: 1;
 }
 .social-links { margin: 15px 0; }
 .social-links a { color: #0071e3; text-decoration: none; margin: 0 10px; }
