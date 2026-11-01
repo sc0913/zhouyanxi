@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KK | Lab</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <main class="lab-section">
+        <!-- 无用机器：弹球 -->
+        <div class="lab-box">
+            <h2 data-zh="无用机器：乱弹小球" data-en="Useless Machine: Bouncing Balls">无用机器：乱弹小球</h2>
+            <p data-zh="在黑色区域内点击鼠标，生成乱弹的小球。" data-en="Click inside the black area to spawn bouncing balls." style="margin-bottom: 15px; color: #86868b;">在黑色区域内点击鼠标，生成乱弹的小球。</p >
+            <canvas id="ball-canvas"></canvas>
+        </div>
+
+        <!-- 互动小游戏：扫雷 -->
+        <div class="lab-box" style="text-align: center;">
+            <h2 data-zh="互动小游戏：扫雷" data-en="Interactive Game: Minesweeper">互动小游戏：扫雷</h2>
+            <p data-zh="左键翻开，右键插旗。" data-en="Left click to reveal, right click to flag." style="margin-bottom: 15px; color: #86868b;">左键翻开，右键插旗。</p >
+            <div id="minesweeper"></div>
+            <button id="restart-btn" class="btn-restart" data-zh="重新开始" data-en="Restart">重新开始</button>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    
+    <script src="main.js"></script>
+    <!-- 注意这里多引入了一个 machine.js，那是我们下一个要建的文件 -->
+    <script src="machine.js"></script>
+</body>
+</html>
