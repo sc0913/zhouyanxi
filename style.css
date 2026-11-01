@@ -32,23 +32,17 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* 全局 main 容器去掉多余的 padding，由各个子页面自己控制 */
-main {
-    flex: 1;
-}
+main { flex: 1; }
 
-/* ================= 鼠标跟随水波光团 ================= */
-#mouse-glow {
+/* 新增：全屏粒子特效画布（绝对不挡点击） */
+#particle-canvas {
     position: fixed;
-    width: 150px; 
-    height: 150px;
-    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(200, 230, 255, 0.6) 40%, rgba(230, 210, 255, 0.3) 70%, transparent 100%);
-    border-radius: 50%;
-    pointer-events: none; 
-    transform: translate(-50%, -50%);
-    transition: transform 0.15s ease-out; 
-    z-index: 0; 
-    filter: blur(6px); 
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* 关键：鼠标可以直接穿透它点到后面的按钮 */
+    z-index: 0; /* 放在最底层，文字上面 */
 }
 
 /* ================= 导航栏 ================= */
@@ -83,7 +77,7 @@ main {
 
 /* ================= 首页 Hero 区域 ================= */
 .hero-section {
-    height: calc(100vh - 48px); /* 恢复满屏 */
+    height: calc(100vh - 48px);
     display: flex; justify-content: center; align-items: center; text-align: center;
     padding: 0 20px;
     position: relative; z-index: 1; 
@@ -95,26 +89,19 @@ main {
     display: flex; flex-direction: column; gap: 8px; align-items: center; 
 }
 
-/* ================= 🔥 我的项目 (加上 120px 顶部留白) ================= */
-.projects-section { 
-    padding: 120px 5% 40px; /* 这里改成了 120px，绝对不会贴顶了！ */
-    max-width: 800px; 
-    margin: 0 auto; 
-    position: relative; z-index: 1; 
-}
+/* ================= 我的项目 ================= */
+.projects-section { padding: 120px 5% 40px; max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
 .project-item {
-    padding: 25px 30px; 
-    margin-bottom: 20px; 
+    padding: 25px 30px; margin-bottom: 20px; 
     background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(15px);
     border-radius: 16px; box-shadow: 0 8px 32px rgba(31, 38, 135, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.5); transition: all 0.3s ease;
 }
 .project-item:hover { transform: scale(1.02) translateY(-2px); box-shadow: 0 12px 35px rgba(31, 38, 135, 0.1); }
 .project-item h3 { font-size: 1.3rem; margin-bottom: 8px; color: #1d1d1f; }
 .project-item p { color: #515154; font-size: 1rem; }
 
-/* ================= 🔥 格言 (加上 120px 顶部留白，一行3个) ================= */
+/* ================= 格言 ================= */
 .quotes-section { padding: 120px 5% 40px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
 .quote-hero {
     text-align: center; margin-bottom: 30px; padding: 25px; 
@@ -123,54 +110,29 @@ main {
     border: 1px solid rgba(255, 255, 255, 0.5);
 }
 .quote-hero h2 { font-size: 1.5rem; font-style: italic; line-height: 1.4; color: #1d1d1f; }
-
-.quote-list { 
-    display: grid; 
-    grid-template-columns: repeat(3, 1fr); /* 强行 3 列 */
-    gap: 20px; 
-    list-style: none; 
-}
+.quote-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; list-style: none; }
 .quote-list li {
-    padding: 20px; 
-    font-size: 1rem; color: #1d1d1f;
+    padding: 20px; font-size: 1rem; color: #1d1d1f;
     background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(15px);
     border-radius: 12px; box-shadow: 0 4px 15px rgba(31, 38, 135, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    transition: all 0.3s ease; display: flex; align-items: center; 
+    border: 1px solid rgba(255, 255, 255, 0.5); transition: all 0.3s ease; display: flex; align-items: center; 
 }
 .quote-list li:hover { transform: scale(1.02) translateY(-2px); box-shadow: 0 12px 35px rgba(31, 38, 135, 0.1); }
+@media (max-width: 900px) { .quote-list { grid-template-columns: 1fr; } }
 
-@media (max-width: 900px) {
-    .quote-list { grid-template-columns: 1fr; }
-}
-
-/* ================= 🔥 实验室 (加上 120px 顶部留白，并完美居中) ================= */
+/* ================= 实验室 ================= */
 .lab-section { 
-    padding: 120px 5% 40px; /* 同样加上 120px 留白 */
-    max-width: 1200px; 
-    margin: 0 auto; 
-    position: relative; 
-    z-index: 1; 
-    display: grid; 
-    grid-template-columns: 1fr 1fr; 
-    gap: 30px; 
-    min-height: calc(100vh - 120px); 
-    align-content: center; 
+    padding: 120px 5% 40px; max-width: 1200px; margin: 0 auto; 
+    position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; 
+    min-height: calc(100vh - 120px); align-content: center; 
 }
 .lab-box { 
-    padding: 25px; 
-    background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(15px);
-    border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 25px; background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(15px);
+    border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid rgba(255, 255, 255, 0.5);
 }
-@media (max-width: 900px) {
-    .lab-section { grid-template-columns: 1fr; min-height: auto; }
-}
-
+@media (max-width: 900px) { .lab-section { grid-template-columns: 1fr; min-height: auto; } }
 .lab-box h2 { margin-bottom: 15px; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 8px; color: #1d1d1f; font-size: 1.3rem; }
 #ball-canvas { width: 100%; height: 250px; background: #f5f5f7; border-radius: 12px; cursor: crosshair; }
-
-/* 扫雷样式微调 */
 #minesweeper { display: grid; grid-template-columns: repeat(9, 28px); gap: 2px; justify-content: center; margin-top: 15px; }
 .cell {
     width: 28px; height: 28px; background: #e5e5ea; border-radius: 4px;
@@ -180,8 +142,7 @@ main {
 .cell.revealed { background: #d2d2d7; cursor: default; }
 .cell.mine { background: #ff3b30; color: white; }
 .btn-restart {
-    margin-top: 15px; padding: 8px 18px; border-radius: 20px;
-    background: #0071e3; color: white; border: none; cursor: pointer;
+    margin-top: 15px; padding: 8px 18px; border-radius: 20px; background: #0071e3; color: white; border: none; cursor: pointer;
     font-size: 0.9rem; transition: background 0.3s; display: block; margin-left: auto; margin-right: auto;
 }
 .btn-restart:hover { background: #0077ed; }
