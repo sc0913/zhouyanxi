@@ -32,10 +32,9 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* 🔥 核心修复：全局顶部留白，彻底告别贴顶！ */
+/* 全局 main 容器去掉多余的 padding，由各个子页面自己控制 */
 main {
     flex: 1;
-    padding-top: 100px; 
 }
 
 /* ================= 鼠标跟随水波光团 ================= */
@@ -84,7 +83,7 @@ main {
 
 /* ================= 首页 Hero 区域 ================= */
 .hero-section {
-    height: calc(80vh - 100px); 
+    height: calc(100vh - 48px); /* 恢复满屏 */
     display: flex; justify-content: center; align-items: center; text-align: center;
     padding: 0 20px;
     position: relative; z-index: 1; 
@@ -96,9 +95,9 @@ main {
     display: flex; flex-direction: column; gap: 8px; align-items: center; 
 }
 
-/* ================= 🔥 我的项目：竖排长条 ================= */
+/* ================= 🔥 我的项目 (加上 120px 顶部留白) ================= */
 .projects-section { 
-    padding: 0 5% 40px; 
+    padding: 120px 5% 40px; /* 这里改成了 120px，绝对不会贴顶了！ */
     max-width: 800px; 
     margin: 0 auto; 
     position: relative; z-index: 1; 
@@ -115,8 +114,8 @@ main {
 .project-item h3 { font-size: 1.3rem; margin-bottom: 8px; color: #1d1d1f; }
 .project-item p { color: #515154; font-size: 1rem; }
 
-/* ================= 🔥 格言：一行放 3 个 ================= */
-.quotes-section { padding: 0 5% 40px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+/* ================= 🔥 格言 (加上 120px 顶部留白，一行3个) ================= */
+.quotes-section { padding: 120px 5% 40px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
 .quote-hero {
     text-align: center; margin-bottom: 30px; padding: 25px; 
     background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(15px);
@@ -127,7 +126,7 @@ main {
 
 .quote-list { 
     display: grid; 
-    grid-template-columns: repeat(3, 1fr); 
+    grid-template-columns: repeat(3, 1fr); /* 强行 3 列 */
     gap: 20px; 
     list-style: none; 
 }
@@ -145,19 +144,17 @@ main {
     .quote-list { grid-template-columns: 1fr; }
 }
 
-/* ================= 🔥 实验室：完美垂直居中，左右并排 ================= */
+/* ================= 🔥 实验室 (加上 120px 顶部留白，并完美居中) ================= */
 .lab-section { 
-    padding: 0 5% 40px; 
+    padding: 120px 5% 40px; /* 同样加上 120px 留白 */
     max-width: 1200px; 
     margin: 0 auto; 
     position: relative; 
     z-index: 1; 
     display: grid; 
-    grid-template-columns: 1fr 1fr; /* 左右两列 */
+    grid-template-columns: 1fr 1fr; 
     gap: 30px; 
-    
-    /* 核心：撑满屏幕高度并垂直居中 */
-    min-height: calc(100vh - 150px); 
+    min-height: calc(100vh - 120px); 
     align-content: center; 
 }
 .lab-box { 
@@ -167,10 +164,7 @@ main {
     border: 1px solid rgba(255, 255, 255, 0.5);
 }
 @media (max-width: 900px) {
-    .lab-section { 
-        grid-template-columns: 1fr; 
-        min-height: auto; /* 手机端取消强制居中，正常往下滚 */
-    }
+    .lab-section { grid-template-columns: 1fr; min-height: auto; }
 }
 
 .lab-box h2 { margin-bottom: 15px; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 8px; color: #1d1d1f; font-size: 1.3rem; }
