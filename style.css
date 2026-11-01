@@ -32,10 +32,10 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* 🔥 修复贴顶问题的核心：给 main 加上顶部留白，避开 48px 的导航栏 */
+/* 🔥 核心修复：全局顶部留白，彻底告别贴顶！ */
 main {
     flex: 1;
-    padding-top: 80px; 
+    padding-top: 100px; 
 }
 
 /* ================= 鼠标跟随水波光团 ================= */
@@ -84,8 +84,7 @@ main {
 
 /* ================= 首页 Hero 区域 ================= */
 .hero-section {
-    /* 减去顶部留白的高度，保证视觉上依然居中且不超高 */
-    height: calc(80vh - 80px); 
+    height: calc(80vh - 100px); 
     display: flex; justify-content: center; align-items: center; text-align: center;
     padding: 0 20px;
     position: relative; z-index: 1; 
@@ -97,18 +96,16 @@ main {
     display: flex; flex-direction: column; gap: 8px; align-items: center; 
 }
 
-/* ================= 项目页 (横向网格) ================= */
+/* ================= 🔥 我的项目：竖排长条 ================= */
 .projects-section { 
-    padding: 20px 5%; /* 顶部距离稍微调小，因为 main 已经留白了 */
-    max-width: 1200px; 
+    padding: 0 5% 40px; 
+    max-width: 800px; 
     margin: 0 auto; 
     position: relative; z-index: 1; 
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 20px;
 }
 .project-item {
-    padding: 25px; 
+    padding: 25px 30px; 
+    margin-bottom: 20px; 
     background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(15px);
     border-radius: 16px; box-shadow: 0 8px 32px rgba(31, 38, 135, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.5);
@@ -116,12 +113,12 @@ main {
 }
 .project-item:hover { transform: scale(1.02) translateY(-2px); box-shadow: 0 12px 35px rgba(31, 38, 135, 0.1); }
 .project-item h3 { font-size: 1.3rem; margin-bottom: 8px; color: #1d1d1f; }
-.project-item p { color: #515154; font-size: 0.95rem; }
+.project-item p { color: #515154; font-size: 1rem; }
 
-/* ================= 格言页 (横向网格) ================= */
-.quotes-section { padding: 20px 5%; max-width: 1400px; margin: 0 auto; position: relative; z-index: 1; }
+/* ================= 🔥 格言：一行放 3 个 ================= */
+.quotes-section { padding: 0 5% 40px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
 .quote-hero {
-    text-align: center; margin-bottom: 25px; padding: 25px; 
+    text-align: center; margin-bottom: 30px; padding: 25px; 
     background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(15px);
     border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.05);
     border: 1px solid rgba(255, 255, 255, 0.5);
@@ -130,8 +127,8 @@ main {
 
 .quote-list { 
     display: grid; 
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 15px; 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px; 
     list-style: none; 
 }
 .quote-list li {
@@ -144,19 +141,38 @@ main {
 }
 .quote-list li:hover { transform: scale(1.02) translateY(-2px); box-shadow: 0 12px 35px rgba(31, 38, 135, 0.1); }
 
-/* ================= 实验室 (横向排版) ================= */
+@media (max-width: 900px) {
+    .quote-list { grid-template-columns: 1fr; }
+}
+
+/* ================= 🔥 实验室：完美垂直居中，左右并排 ================= */
 .lab-section { 
-    padding: 20px 5%; max-width: 1200px; margin: 0 auto; 
-    display: flex; flex-direction: row; flex-wrap: wrap; gap: 30px; 
-    position: relative; z-index: 1; 
-    align-items: flex-start; 
+    padding: 0 5% 40px; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    position: relative; 
+    z-index: 1; 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; /* 左右两列 */
+    gap: 30px; 
+    
+    /* 核心：撑满屏幕高度并垂直居中 */
+    min-height: calc(100vh - 150px); 
+    align-content: center; 
 }
 .lab-box { 
-    flex: 1 1 450px; padding: 25px; 
+    padding: 25px; 
     background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(15px);
     border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.03);
     border: 1px solid rgba(255, 255, 255, 0.5);
 }
+@media (max-width: 900px) {
+    .lab-section { 
+        grid-template-columns: 1fr; 
+        min-height: auto; /* 手机端取消强制居中，正常往下滚 */
+    }
+}
+
 .lab-box h2 { margin-bottom: 15px; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 8px; color: #1d1d1f; font-size: 1.3rem; }
 #ball-canvas { width: 100%; height: 250px; background: #f5f5f7; border-radius: 12px; cursor: crosshair; }
 
