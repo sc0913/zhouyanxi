@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KK | Quotes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <main class="quotes-section">
+        <!-- 顶部随机展示一句格言 -->
+        <div class="quote-hero">
+            <h2 id="random-quote">加载中...</h2>
+        </div>
+        
+        <!-- 15 句格言列表 -->
+        <ul class="quote-list">
+            <li data-zh="其实地上本没有路，走的人多了，也便成了路。 —— 鲁迅" data-en="Actually, there was no road on the earth at first, but when many people walk on it, it becomes a road. — Lu Xun">其实地上本没有路，走的人多了，也便成了路。 —— 鲁迅</li>
+            <li data-zh="世界上只有一种真正的英雄主义，那就是认清生活真相后依然热爱生活。 —— 罗曼·罗兰" data-en="There is only one true heroism in the world: to see the world as it is and to love it. — Romain Rolland">世界上只有一种真正的英雄主义，那就是认清生活真相后依然热爱生活。 —— 罗曼·罗兰</li>
+            <li data-zh="竹杖芒鞋轻胜马，谁怕？一蓑烟雨任平生。 —— 苏轼" data-en="With a bamboo staff and straw sandals, lighter than a horse, who's afraid? I'll spend my life in a misty rain in a straw cloak. — Su Shi">竹杖芒鞋轻胜马，谁怕？一蓑烟雨任平生。 —— 苏轼</li>
+            <li data-zh="求知若饥，虚心若愚。 —— 乔布斯" data-en="Stay hungry, stay foolish. — Steve Jobs">求知若饥，虚心若愚。 —— 乔布斯</li>
+            <li data-zh="岁月不饶人，我亦未曾饶过岁月。 —— 木心" data-en="Time is unforgiving, but I have never let time off the hook either. — Mu Xin">岁月不饶人，我亦未曾饶过岁月。 —— 木心</li>
+            <li data-zh="在隆冬，我终于知道，我身上有一个不可战胜的夏天。 —— 加缪" data-en="In the depth of winter, I finally learned that there was in me an invincible summer. — Albert Camus">在隆冬，我终于知道，我身上有一个不可战胜的夏天。 —— 加缪</li>
+            <li data-zh="人间烟火气，最抚凡人心。 —— 汪曾祺" data-en="The mundane worldly atmosphere is what most soothes the human heart. — Wang Zengqi">人间烟火气，最抚凡人心。 —— 汪曾祺</li>
+            <li data-zh="永远不要把今天能拖到明天的事，留到大后天做。 —— 马克·吐温" data-en="Never put off till tomorrow what you can do the day after tomorrow. — Mark Twain">永远不要把今天能拖到明天的事，留到大后天做。 —— 马克·吐温</li>
+            <li data-zh="知行合一。 —— 王阳明" data-en="Unity of knowledge and action. — Wang Yangming">知行合一。 —— 王阳明</li>
+            <li data-zh="希望是美好的，也许是人间至善。 —— 《肖申克的救赎》" data-en="Hope is a good thing, maybe the best of things. — The Shawshank Redemption">希望是美好的，也许是人间至善。 —— 《肖申克的救赎》</li>
+            <li data-zh="人生唯一确定的就是不确定的人生。 —— 罗翔" data-en="The only certainty in life is its uncertainty. — Luo Xiang">人生唯一确定的就是不确定的人生。 —— 罗翔</li>
+            <li data-zh="世界以痛吻我，要我报之以歌。 —— 泰戈尔" data-en="The world has kissed my soul with its pain, asking for its return in songs. — Rabindranath Tagore">世界以痛吻我，要我报之以歌。 —— 泰戈尔</li>
+            <li data-zh="只要我躺得够平，烦恼就追不上我。 —— 网络流行语" data-en="As long as I lie flat enough, worries can't catch me. — Internet Slang">只要我躺得够平，烦恼就追不上我。 —— 网络流行语</li>
+            <li data-zh="生存还是毁灭，这是个问题。 —— 莎士比亚" data-en="To be, or not to be, that is the question. — William Shakespeare">生存还是毁灭，这是个问题。 —— 莎士比亚</li>
+            <li data-zh="沉湎于虚幻的梦想而忘记现实的生活，是毫无益处的。 —— 邓布利多" data-en="It does not do to dwell on dreams and forget to live. — Albus Dumbledore">沉湎于虚幻的梦想而忘记现实的生活，是毫无益处的。 —— 邓布利多</li>
+        </ul>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    
+    <!-- 引入全站通用JS -->
+    <script src="main.js"></script>
+    
+    <!-- 随机格言展示逻辑 -->
+    <script>
+        window.renderRandomQuote = function() {
+            const quotes = document.querySelectorAll('.quote-list li');
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const selectedQuote = quotes[randomIndex];
+            // 检查当前是中文还是英文
+            const isZh = (localStorage.getItem('lang') || 'zh') === 'zh';
+            document.getElementById('random-quote').textContent = isZh ? selectedQuote.getAttribute('data-zh') : selectedQuote.getAttribute('data-en');
+        };
+        
+        // 稍微延迟一下，确保导航栏和双语切换加载完毕后再渲染
+        setTimeout(renderRandomQuote, 200); 
+    </script>
+</body>
+</html>
