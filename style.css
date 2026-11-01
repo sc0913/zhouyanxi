@@ -1,4 +1,3 @@
-/* 全局重置与字体 */
 * {
     margin: 0;
     padding: 0;
@@ -7,7 +6,7 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
-    color: #1d1d1f; /* 苹果黑字 */
+    color: #1d1d1f; 
     line-height: 1.5;
     -webkit-font-smoothing: antialiased; 
     overflow-x: hidden;
@@ -15,13 +14,18 @@ body {
     flex-direction: column;
     min-height: 100vh;
     
-    /* 极光白动态渐变背景 */
-    background: linear-gradient(120deg, #ffffff 0%, #f0f4ff 40%, #e8f0fe 70%, #ffffff 100%);
+    /* 梦幻贝母背景：多层柔和幻彩交织 */
+    background-color: #ffffff;
+    background-image: 
+        radial-gradient(at 10% 20%, rgba(255, 200, 221, 0.4) 0px, transparent 50%), /* 珍珠粉 */
+        radial-gradient(at 90% 10%, rgba(200, 230, 255, 0.5) 0px, transparent 50%), /* 珍珠蓝 */
+        radial-gradient(at 50% 80%, rgba(220, 255, 230, 0.4) 0px, transparent 50%), /* 珍珠绿 */
+        radial-gradient(at 80% 90%, rgba(230, 210, 255, 0.4) 0px, transparent 50%); /* 珍珠紫 */
     background-size: 200% 200%;
-    animation: aurora 12s ease infinite;
+    animation: motherOfPearl 15s ease infinite;
 }
 
-@keyframes aurora {
+@keyframes motherOfPearl {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
@@ -32,18 +36,19 @@ main {
     padding-top: 80px; 
 }
 
-/* ================= 鼠标跟随水波纹光团 ================= */
+/* ================= 鼠标跟随水波光团 ================= */
 #mouse-glow {
     position: fixed;
-    width: 600px; 
-    height: 600px;
-    /* 极光蓝紫光晕 */
-    background: radial-gradient(circle, rgba(120, 160, 255, 0.15) 0%, rgba(120, 160, 255, 0.05) 40%, rgba(255, 255, 255, 0) 70%);
+    width: 250px; /* 缩小尺寸 */
+    height: 250px;
+    /* 水波纹：中心白，向外扩散淡蓝，边缘模糊透明 */
+    background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(180, 220, 255, 0.4) 40%, rgba(255, 200, 230, 0.1) 70%, transparent 100%);
     border-radius: 50%;
-    pointer-events: none; /* 关键：不挡住鼠标点击 */
+    pointer-events: none; /* 绝对不能挡住点击 */
     transform: translate(-50%, -50%);
-    transition: transform 0.1s ease-out; /* 形成水波拖影感 */
-    z-index: 0; /* 放底层 */
+    transition: transform 0.15s ease-out; /* 滑动时的柔和拖影 */
+    z-index: 0; 
+    filter: blur(8px); /* 增加水波般的柔焦感 */
 }
 
 /* ================= 导航栏 (白底毛玻璃) ================= */
@@ -56,11 +61,11 @@ main {
     justify-content: space-between;
     align-items: center;
     padding: 0 5%;
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.6);
     backdrop-filter: saturate(180%) blur(20px); 
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     z-index: 1000;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.3);
 }
 
 .navbar .logo { font-size: 1.2rem; font-weight: 600; letter-spacing: 1px; color: #1d1d1f; }
@@ -80,7 +85,7 @@ main {
     display: flex; justify-content: center; align-items: center; text-align: center;
     padding: 0 20px;
     position: relative; 
-    z-index: 1; /* 保证文字在光团上方 */
+    z-index: 1; 
 }
 .hero-content h1 { font-size: 4rem; font-weight: 700; letter-spacing: -1px; margin-bottom: 10px; color: #1d1d1f; }
 .hero-content h2 { font-size: 1.5rem; color: #86868b; font-weight: 500; margin-bottom: 30px; }
@@ -101,11 +106,11 @@ main {
 .projects-section { padding: 60px 10%; max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
 .project-item {
     padding: 30px; margin-bottom: 20px;
-    background: rgba(255, 255, 255, 0.8); 
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.6); /* 卡片半透明 */
+    backdrop-filter: blur(15px);
     border-radius: 18px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-    border: 1px solid rgba(0,0,0,0.03);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.5);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .project-item:hover { transform: scale(1.02); box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
@@ -116,10 +121,11 @@ main {
 .quotes-section { padding: 60px 10%; max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
 .quote-hero {
     text-align: center; margin-bottom: 60px; padding: 40px;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(15px);
     border-radius: 24px;
     box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    border: 1px solid rgba(255, 255, 255, 0.5);
 }
 .quote-hero h2 { font-size: 2rem; font-style: italic; line-height: 1.4; color: #1d1d1f; }
 .quote-list { list-style: none; }
@@ -131,10 +137,11 @@ main {
 /* ================= 实验室 ================= */
 .lab-section { padding: 60px 10%; max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; position: relative; z-index: 1; }
 .lab-box { 
-    background: rgba(255, 255, 255, 0.8); 
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.6); 
+    backdrop-filter: blur(15px);
     border-radius: 20px; padding: 30px; 
     box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    border: 1px solid rgba(255, 255, 255, 0.5);
 }
 .lab-box h2 { margin-bottom: 20px; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 10px; color: #1d1d1f; }
 #ball-canvas { width: 100%; height: 300px; background: #f5f5f7; border-radius: 12px; cursor: crosshair; }
@@ -157,7 +164,7 @@ main {
 
 /* ================= Footer ================= */
 .site-footer {
-    background: rgba(255, 255, 255, 0.8); padding: 30px; text-align: center;
+    background: rgba(255, 255, 255, 0.6); padding: 30px; text-align: center;
     font-size: 0.85rem; color: #86868b; margin-top: auto;
     border-top: 1px solid rgba(0,0,0,0.05);
     backdrop-filter: blur(10px);
